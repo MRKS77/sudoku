@@ -9,6 +9,7 @@ module.exports = function solveSudoku(matrix) {
         }
       }
     }
+    return matrix
   }
 
   function solveZero(row, col) {
@@ -26,15 +27,15 @@ module.exports = function solveSudoku(matrix) {
         digits = digits.filter(e => e !== (matrix[blockRow][blockCol]))
       }
     }
+    if (digits.length === 0) {
+      return false
+    }
     for (let l = 0; l < digits.length; l++) {
-      console.log(digits[l])
       matrix[row][col] = digits[l]
       if (ifZero(solveZero)) return matrix
+      else matrix[row][col] = 0
     }
-    return false
   }
 
-  ifZero(solveZero)
-  console.log(matrix)
-  return matrix
+  return ifZero(solveZero)
 }
